@@ -1,0 +1,3 @@
+[submodule "WebContent/lib/phaser"]
+	path = WebContent/lib/phaser
+	url = https://github.com/Waog/phaser
