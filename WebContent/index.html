@@ -1,11 +1,27 @@
-<!doctype html>
+<!DOCTYPE HTML>
 <html>
 <head>
 <meta charset="UTF-8" />
-<title>hello phaser!</title>
+<title>phaser-bp</title>
+<style>
+body {
+	margin: 0;
+}
+</style>
 <script src="lib/phaser/build/phaser.min.js"></script>
+<script src="js/scenes/Bootloader.js"></script>
+<script src="js/scenes/Preloader.js"></script>
+<script src="js/scenes/MainMenu.js"></script>
 </head>
 <body>
-	<script type="text/javascript" src="js/main.js"></script>
+	<script type="text/javascript">
+		(function() {
+			var game = new Phaser.Game(800, 600, Phaser.AUTO, 'game');
+			game.state.add('Bootloader', Scene.Bootloader);
+			game.state.add('Preloader', Scene.Preloader);
+			game.state.add('MainMenu', Scene.MainMenu);
+			game.state.start('Bootloader');
+		})();
+	</script>
 </body>
 </html>
