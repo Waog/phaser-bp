@@ -1,3 +1,6 @@
 [submodule "WebContent/lib/phaser"]
 	path = WebContent/lib/phaser
 	url = https://github.com/Waog/phaser
+[submodule "WebContent/assets/placeholder"]
+	path = WebContent/assets/placeholder
+	url = https://github.com/Waog/game-placeholder-assets
