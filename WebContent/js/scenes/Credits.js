@@ -9,7 +9,7 @@ Scene.Credits = function(game) {
 Scene.Credits.prototype = {
 	preload : function() {
 		this.load.image('creditsBg',
-				'assets/placeholder/img/squareGradientTopDownGrey.png');
+				'assets/placeholder/img/squareGradientTopDownBlue.png');
 	},
 
 	create : function() {

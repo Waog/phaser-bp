@@ -27,13 +27,11 @@ Scene.GameScene.prototype = {
 	},
 
 	onWin : function() {
-		console.log('TODO: add win scene');
-		// this.game.state.start('WinScene');
+		this.game.state.start('Win');
 	},
 
 	onLose : function() {
-		console.log('TODO: add lose scene');
-		// this.game.state.start('LoseScene');
+		 this.game.state.start('Lose');
 	},
 
 	addPhysicsMovmentAndColision : function(sprite) {

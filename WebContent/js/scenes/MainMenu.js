@@ -3,7 +3,7 @@ Scene.MainMenu = function(game) {
 Scene.MainMenu.prototype = {
 	preload : function() {
 		this.load.image('mainMenuBg',
-				'assets/placeholder/img/squareGradientTopDownRed.png');
+				'assets/placeholder/img/squareGradientTopDownGrey.png');
 	},
 
 	create : function() {

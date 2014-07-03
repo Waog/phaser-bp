@@ -15,6 +15,8 @@ body {
 <script src="js/scenes/MainMenu.js"></script>
 <script src="js/scenes/Credits.js"></script>
 <script src="js/scenes/GameScene.js"></script>
+<script src="js/scenes/Win.js"></script>
+<script src="js/scenes/Lose.js"></script>
 </head>
 <body>
 	<script type="text/javascript">
@@ -25,6 +27,8 @@ body {
 			game.state.add('MainMenu', Scene.MainMenu);
 			game.state.add('Credits', Scene.Credits);
 			game.state.add('GameScene', Scene.GameScene);
+			game.state.add('Win', Scene.Win);
+			game.state.add('Lose', Scene.Lose);
 			game.state.start('Bootloader');
 		})();
 	</script>
