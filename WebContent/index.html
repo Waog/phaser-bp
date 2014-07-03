@@ -9,9 +9,11 @@ body {
 }
 </style>
 <script src="lib/phaser/build/phaser.min.js"></script>
+<script src="js/util/utils.js"></script>
 <script src="js/scenes/Bootloader.js"></script>
 <script src="js/scenes/Preloader.js"></script>
 <script src="js/scenes/MainMenu.js"></script>
+<script src="js/scenes/Credits.js"></script>
 </head>
 <body>
 	<script type="text/javascript">
@@ -20,6 +22,7 @@ body {
 			game.state.add('Bootloader', Scene.Bootloader);
 			game.state.add('Preloader', Scene.Preloader);
 			game.state.add('MainMenu', Scene.MainMenu);
+			game.state.add('Credits', Scene.Credits);
 			game.state.start('Bootloader');
 		})();
 	</script>

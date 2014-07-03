@@ -13,7 +13,8 @@ Scene.Preloader.prototype = {
 
 		// preload and configure global content
 		this.game.stage.backgroundColor = '#123456';
-		// this.load.image('globalImage', 'assets/any.png');
+		this.load.spritesheet('button',
+				'assets/placeholder/spriteSheets/button.png', 300, 100);
 	},
 	create : function() {
 		this.game.state.start('MainMenu');
