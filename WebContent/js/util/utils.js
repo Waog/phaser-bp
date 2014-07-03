@@ -7,10 +7,10 @@ var createButton = function(callbackHolder, game, textString, callback, x, y) {
 	button.anchor.setTo(0.5, 0.5);
 
 	var textStyle = {
-		font : "65px Arial",
-		fill : "#123456",
-		align : "center"
-	};
+			font : "65px Arial",
+			fill : "#123456",
+			align : "center"
+		};
 	var text = game.add.text(button.x, button.y, textString, textStyle);
 	text.anchor.setTo(0.5, 0.5);
 };
