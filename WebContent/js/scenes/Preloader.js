@@ -15,9 +15,8 @@ Scene.Preloader.prototype = {
         this.game.stage.backgroundColor = '#123456';
         this.load.spritesheet('button',
                 'assets/placeholder/spriteSheets/button.png', 300, 100);
-        this.game.load.audio('click', [ 'assets/placeholder/fx/blip.mp3',
-                'assets/placeholder/fx/blip.ogg',
-                'assets/placeholder/fx/blip.m4a' ]);
+        this.game.load.audio('click', utils
+                .getAudioFileArray('assets/placeholder/fx/blip'));
         this.game.clickSound = this.game.add.audio('click');
     },
     create : function() {

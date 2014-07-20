@@ -29,7 +29,7 @@ Scene.Credits.prototype = {
         text.wordWrapWidth = this.game.world.width - 2 * PADDING;
         text.anchor.setTo(0.5, 0);
 
-        createButton(this, this.game, "Back", this.onBack,
+        utils.createButton(this, this.game, "Back", this.onBack,
                 this.game.world.centerX, 300);
     },
 

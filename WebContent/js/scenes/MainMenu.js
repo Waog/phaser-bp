@@ -11,8 +11,8 @@ Scene.MainMenu.prototype = {
         this.bg.width = this.game.world.width;
         this.bg.height = this.game.world.height;
 
-        createButton(this, this.game, "Start", this.onStart, 100, 300);
-        createButton(this, this.game, "Credits", this.onCredits, 400, 300);
+        utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
+        utils.createButton(this, this.game, "Credits", this.onCredits, 400, 300);
     },
 
     onStart : function() {
