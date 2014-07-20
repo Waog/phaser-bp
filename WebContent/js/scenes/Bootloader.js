@@ -22,13 +22,13 @@ var Scene = {};
 Scene.Bootloader = function(game) {
 };
 Scene.Bootloader.prototype = {
-	preload : function() {
-		this.load.image('preloaderBg',
-				'assets/placeholder/img/squareGradientTopDownBlue.png');
-		this.load.image('preloaderBar',
-				'assets/placeholder/img/squareGreen3D.png');
-	},
-	create : function() {
-		this.game.state.start('Preloader');
-	}
+    preload : function() {
+        this.load.image('preloaderBg',
+                'assets/placeholder/img/squareGradientTopDownBlue.png');
+        this.load.image('preloaderBar',
+                'assets/placeholder/img/squareGreen3D.png');
+    },
+    create : function() {
+        this.game.state.start('Preloader');
+    }
 };
