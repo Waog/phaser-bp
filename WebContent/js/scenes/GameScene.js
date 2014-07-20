@@ -5,6 +5,10 @@ Scene.GameScene.prototype = {
         this.load.image('gameBg', 'assets/placeholder/img/squareBlue.png');
         this.load.image('enemy', 'assets/placeholder/img/headBlack.png');
         this.load.image('friend', 'assets/placeholder/img/headWhite.png');
+
+        this.game.load.audio('hit', utils
+                .getAudioFileArray('assets/placeholder/fx/hit'));
+        this.hitSound = this.game.add.audio('hit');
     },
 
     create : function() {
@@ -27,10 +31,12 @@ Scene.GameScene.prototype = {
     },
 
     onWin : function() {
+        this.hitSound.play();
         this.game.state.start('Win');
     },
 
     onLose : function() {
+        this.hitSound.play();
         this.game.state.start('Lose');
     },
 
