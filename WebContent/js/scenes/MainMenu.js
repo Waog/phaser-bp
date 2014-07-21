@@ -10,6 +10,8 @@ Scene.MainMenu.prototype = {
     },
 
     create : function() {
+        this.music.play();
+        
         this.bg = this.add.sprite(0, 0, "mainMenuBg");
         this.bg.width = this.game.world.width;
         this.bg.height = this.game.world.height;
@@ -17,7 +19,6 @@ Scene.MainMenu.prototype = {
         utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
         utils.createButton(this, this.game, "Credits", this.onCredits, 400, 300);
         
-        this.music.play();
     },
 
     onStart : function() {
@@ -28,6 +29,7 @@ Scene.MainMenu.prototype = {
 
     onCredits : function() {
         this.game.clickSound.play();
+        this.music.stop();
         this.game.state.start('Credits');
     }
 };
