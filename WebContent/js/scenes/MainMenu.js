@@ -13,7 +13,9 @@ Scene.MainMenu.prototype = {
         this.bg.height = this.game.world.height;
 
         utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
-        utils.createButton(this, this.game, "Credits", this.onCredits, 400, 300);
+        utils
+                .createButton(this, this.game, "Credits", this.onCredits, 400,
+                        300);
 
     },
 
@@ -26,7 +28,7 @@ Scene.MainMenu.prototype = {
         this.game.clickSound.play();
         this.game.state.start('Credits');
     },
-    
+
     shutdown : function() {
         this.game.mainMenuMusic.stop();
     }

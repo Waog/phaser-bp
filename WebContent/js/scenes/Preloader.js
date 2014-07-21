@@ -18,12 +18,18 @@ Scene.Preloader.prototype = {
         this.game.load.audio('click', utils
                 .getAudioFileArray('assets/placeholder/fx/blip'));
         this.game.clickSound = this.game.add.audio('click');
+        
         this.game.load.audio('track01', utils
                 .getAudioFileArray('assets/placeholder/music/track01'));
         this.game.load.audio('track02', utils
                 .getAudioFileArray('assets/placeholder/music/track02'));
         this.game.load.audio('track03', utils
                 .getAudioFileArray('assets/placeholder/music/track03'));
+        
+        this.track01 = this.game.add.audio('track01', 0);
+        this.track02 = this.game.add.audio('track02', 0);
+        this.track03 = this.game.add.audio('track03', 0);
+        
         this.game.mainMenuMusic = this.game.add.audio('track01', 1, true);
         this.game.creditsMusic = this.game.add.audio('track02', 1, true);
         this.game.gameplayMusic = this.game.add.audio('track03', 1, true);
@@ -31,6 +37,24 @@ Scene.Preloader.prototype = {
         this.game.loseSceneMusic = this.game.add.audio('track02', 1, true);
     },
     create : function() {
+        this.track01.onPlay.add(this.track01PlayedOnce, this);
+        this.track01.play();
+    },
+    
+    track01PlayedOnce : function() {
+        this.track01.stop();
+        this.track02.onPlay.add(this.track02PlayedOnce, this);
+        this.track02.play();
+    },
+    
+    track02PlayedOnce : function() {
+        this.track02.stop();
+        this.track03.onPlay.add(this.track03PlayedOnce, this);
+        this.track03.play();
+    },
+    
+    track03PlayedOnce : function() {
+        this.track03.stop();
         this.game.state.start('MainMenu');
     }
 };
