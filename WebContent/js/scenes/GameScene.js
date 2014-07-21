@@ -9,16 +9,11 @@ Scene.GameScene.prototype = {
         this.game.load.audio('hit', utils
                 .getAudioFileArray('assets/placeholder/fx/hit'));
         this.hitSound = this.game.add.audio('hit');
-        
-        this.game.load.audio('gameMusic', utils
-                .getAudioFileArray('assets/placeholder/music/track03'));
-        this.music = this.game.add.audio('gameMusic', 1, true);
 
+        this.game.gameplayMusic.play();
     },
 
     create : function() {
-        this.music.play();
-        
         this.game.physics.startSystem(Phaser.Physics.ARCADE);
 
         this.bg = this.add.sprite(0, 0, "gameBg");
@@ -39,13 +34,11 @@ Scene.GameScene.prototype = {
 
     onWin : function() {
         this.hitSound.play();
-        this.music.stop();
         this.game.state.start('Win');
     },
 
     onLose : function() {
         this.hitSound.play();
-        this.music.stop();
         this.game.state.start('Lose');
     },
 
@@ -61,5 +54,9 @@ Scene.GameScene.prototype = {
     addInputHandler : function(sprite, callback) {
         sprite.inputEnabled = true;
         sprite.events.onInputDown.add(callback, this);
+    },
+    
+    shutdown : function() {
+        this.game.gameplayMusic.stop();
     }
 };

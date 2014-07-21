@@ -10,14 +10,10 @@ Scene.Credits.prototype = {
     preload : function() {
         this.load.image('creditsBg',
                 'assets/placeholder/img/squareGradientTopDownBlue.png');
-        this.game.load.audio('creditsMenuMusic', utils
-                .getAudioFileArray('assets/placeholder/music/track02'));
-        this.music = this.game.add.audio('creditsMenuMusic', 1, true);
+        this.game.creditsMusic.play();
     },
 
     create : function() {
-        this.music.play();
-        
         this.bg = this.add.sprite(0, 0, "creditsBg");
         this.bg.width = this.game.world.width;
         this.bg.height = this.game.world.height;
@@ -40,7 +36,10 @@ Scene.Credits.prototype = {
 
     onBack : function() {
         this.game.clickSound.play();
-        this.music.stop();
         this.game.state.start('MainMenu');
     },
+    
+    shutdown : function() {
+        this.game.creditsMusic.stop();
+    }
 };
