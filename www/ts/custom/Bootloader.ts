@@ -1,6 +1,6 @@
 module GameBp {
 
-    
+     
     export class Bootloader extends Phaser.State {
 
         
