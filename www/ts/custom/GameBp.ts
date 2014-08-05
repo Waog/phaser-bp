@@ -4,7 +4,7 @@ module GameBp {
 
         constructor() {
 
-            super(640, 480, Phaser.AUTO, 'game');
+            super(640, 480, Phaser.AUTO, '');
 
             this.state.add('Bootloader', Bootloader);
             this.state.add('Preloader', Preloader);

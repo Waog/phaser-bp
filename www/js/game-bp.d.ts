@@ -22,6 +22,11 @@ declare module GameBp {
     }
 }
 declare module GameBp {
+    class GameBp extends Phaser.Game {
+        constructor();
+    }
+}
+declare module GameBp {
     class MainMenu extends Phaser.State {
         public background: Phaser.Sprite;
         public logo: Phaser.BitmapText;
@@ -45,28 +50,6 @@ declare module GameBp {
     }
 }
 declare module GameBp {
-    class Win extends Phaser.State {
-        public bg: Phaser.Sprite;
-        public preload(): void;
-        public create(): void;
-        public onInteraction(): void;
-        public shutdown(): void;
-    }
-}
-declare module GameBp {
-    class DecoratedButton extends Phaser.Group {
-        static PADDING: number;
-        public button: Phaser.Button;
-        public label: Phaser.BitmapText;
-        constructor(text: string, game: Phaser.Game, callback: Function, callbackContext: Object, size?: number, x?: number, y?: number);
-    }
-}
-declare module GameBp {
-    class GameBp extends Phaser.Game {
-        constructor();
-    }
-}
-declare module GameBp {
     class Bootloader extends Phaser.State {
         public preload(): void;
         public create(): void;
@@ -83,5 +66,22 @@ declare module GameBp {
         public create(): void;
         public onBack(): void;
         public shutdown(): void;
+    }
+}
+declare module GameBp {
+    class Win extends Phaser.State {
+        public bg: Phaser.Sprite;
+        public preload(): void;
+        public create(): void;
+        public onInteraction(): void;
+        public shutdown(): void;
+    }
+}
+declare module GameBp {
+    class DecoratedButton extends Phaser.Group {
+        static PADDING: number;
+        public button: Phaser.Button;
+        public label: Phaser.BitmapText;
+        constructor(text: string, game: Phaser.Game, callback: Function, callbackContext: Object, size?: number, x?: number, y?: number);
     }
 }
