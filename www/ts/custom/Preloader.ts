@@ -34,6 +34,8 @@ module GameBp {
                 .getAudioFileArray('assets/placeholder/music/track02'));
             this.load.audio('track03', Utils
                 .getAudioFileArray('assets/placeholder/music/track03'));
+
+            this.load.bitmapFont('bmFont', 'assets/placeholder/fonts/font.png', 'assets/placeholder/fonts/font.fnt');
         }
 
 

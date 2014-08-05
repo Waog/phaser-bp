@@ -14,7 +14,6 @@ module GameBp {
             this.load.image('creditsBg',
                 'assets/placeholder/img/squareGradientTopDownBlue.png');
             //            this.game.creditsMus            
-            this.load.bitmapFont('bmFont', 'assets/placeholder/fonts/font.png', 'assets/placeholder/fonts/font.fnt');
         }
 
         create() {

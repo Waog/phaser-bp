@@ -158,14 +158,16 @@ var GameBp;
             this.background.height = this.game.world.height;
             this.background.alpha = 0;
 
-            this.logo = this.add.sprite(this.world.centerX, -200, 'logo');
-            this.logo.anchor.setTo(0.5, 0.5);
+            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'Awesomo II', 72);
+            this.logo.x = this.world.centerX - this.logo.width / 2;
 
             this.add.tween(this.background).to({ alpha: 1 }, 1000, Phaser.Easing.Bounce.InOut, true);
             this.add.tween(this.logo).to({ y: 100 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
 
-            Utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
-            Utils.createButton(this, this.game, "Credits", this.onCredits, 400, 300);
+            var startBtn = new GameBp.DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5);
+            this.add.existing(startBtn);
+            var creditsBtn = new GameBp.DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5);
+            this.add.existing(creditsBtn);
         };
 
         MainMenu.prototype.onStart = function () {
@@ -225,6 +227,8 @@ var GameBp;
             this.load.audio('track01', Utils.getAudioFileArray('assets/placeholder/music/track01'));
             this.load.audio('track02', Utils.getAudioFileArray('assets/placeholder/music/track02'));
             this.load.audio('track03', Utils.getAudioFileArray('assets/placeholder/music/track03'));
+
+            this.load.bitmapFont('bmFont', 'assets/placeholder/fonts/font.png', 'assets/placeholder/fonts/font.fnt');
         };
 
         Preloader.prototype.create = function () {
@@ -312,9 +316,7 @@ var GameBp;
         }
         Credits.prototype.preload = function () {
             this.load.image('creditsBg', 'assets/placeholder/img/squareGradientTopDownBlue.png');
-
             //            this.game.creditsMus
-            this.load.bitmapFont('bmFont', 'assets/placeholder/fonts/font.png', 'assets/placeholder/fonts/font.fnt');
         };
 
         Credits.prototype.create = function () {
@@ -387,5 +389,39 @@ var GameBp;
         return Win;
     })(Phaser.State);
     GameBp.Win = Win;
+})(GameBp || (GameBp = {}));
+var GameBp;
+(function (GameBp) {
+    var DecoratedButton = (function (_super) {
+        __extends(DecoratedButton, _super);
+        function DecoratedButton(text, game, callback, callbackContext, size, x, y) {
+            if (typeof size === "undefined") { size = 65; }
+            _super.call(this, game);
+
+            this.button = new Phaser.Button(game, 0, 0, 'button', callback, callbackContext, 2, 1, 0);
+
+            this.label = game.add.bitmapText(DecoratedButton.PADDING, DecoratedButton.PADDING, 'bmFont', text, size);
+
+            this.button.width = this.label.width + 3 * DecoratedButton.PADDING;
+            this.button.height = this.label.height + 3 * DecoratedButton.PADDING;
+
+            this.add(this.button);
+            this.add(this.label);
+
+            if (x) {
+                this.x = x - this.button.width / 2;
+            } else {
+                this.x = game.world.centerX - this.button.width / 2;
+            }
+            if (y) {
+                this.y = y - this.button.height / 2;
+            } else {
+                this.y = game.world.centerY - this.button.height / 2;
+            }
+        }
+        DecoratedButton.PADDING = 15;
+        return DecoratedButton;
+    })(Phaser.Group);
+    GameBp.DecoratedButton = DecoratedButton;
 })(GameBp || (GameBp = {}));
 //# sourceMappingURL=game-bp.js.map

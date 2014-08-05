@@ -3,7 +3,7 @@ module GameBp {
     export class MainMenu extends Phaser.State {
 
         background: Phaser.Sprite;
-        logo: Phaser.Sprite;
+        logo: Phaser.BitmapText;
 
 
         preload() {
@@ -23,31 +23,33 @@ module GameBp {
             this.background.height = this.game.world.height;
             this.background.alpha = 0;
 
-            this.logo = this.add.sprite(this.world.centerX, -200, 'logo');
-            this.logo.anchor.setTo(0.5, 0.5);
+            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'Awesomo II', 72);
+            this.logo.x = this.world.centerX - this.logo.width / 2;
 
             this.add.tween(this.background).to({ alpha: 1 }, 1000, Phaser.Easing.Bounce.InOut, true);
             this.add.tween(this.logo).to({ y: 100 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
 
-            Utils.createButton(this, this.game, "Start", this.onStart, 100, 300);
-            Utils.createButton(this, this.game, "Credits", this.onCredits, 400, 300);
+            var startBtn: DecoratedButton = new DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5);
+            this.add.existing(startBtn);
+            var creditsBtn: DecoratedButton = new DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5);
+            this.add.existing(creditsBtn);
         }
 
 
         onStart() {
 
-//            this.game.clickSound.play();
+            //            this.game.clickSound.play();
             this.fadeOut(this.startGame, this);
         }
 
-        
+
         onCredits() {
-//            this.game.clickSound.play();
+            //            this.game.clickSound.play();
             this.game.state.start('Credits');
         }
 
 
-        fadeOut(callback:Function, callbackContext:any) {
+        fadeOut(callback: Function, callbackContext: any) {
 
             this.add.tween(this.background).to({ alpha: 0 }, 1000, Phaser.Easing.Linear.None, true);
             var tween = this.add.tween(this.logo).to({ y: 800 }, 1000, Phaser.Easing.Linear.None, true);
@@ -66,9 +68,9 @@ module GameBp {
             this.game.state.start('Credits');
         }
 
-        
+
         shutdown() {
-//            this.game.mainMenuMusic.stop();
+            //            this.game.mainMenuMusic.stop();
         }
     }
 }

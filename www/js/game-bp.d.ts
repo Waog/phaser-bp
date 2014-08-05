@@ -29,7 +29,7 @@ declare module GameBp {
 declare module GameBp {
     class MainMenu extends Phaser.State {
         public background: Phaser.Sprite;
-        public logo: Phaser.Sprite;
+        public logo: Phaser.BitmapText;
         public preload(): void;
         public create(): void;
         public onStart(): void;
@@ -75,5 +75,13 @@ declare module GameBp {
         public create(): void;
         public onInteraction(): void;
         public shutdown(): void;
+    }
+}
+declare module GameBp {
+    class DecoratedButton extends Phaser.Group {
+        static PADDING: number;
+        public button: Phaser.Button;
+        public label: Phaser.BitmapText;
+        constructor(text: string, game: Phaser.Game, callback: Function, callbackContext: Object, size?: number, x?: number, y?: number);
     }
 }
