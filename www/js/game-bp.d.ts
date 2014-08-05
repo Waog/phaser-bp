@@ -1,24 +1,4 @@
 declare module GameBp {
-    class Bootloader extends Phaser.State {
-        public preload(): void;
-        public create(): void;
-    }
-}
-declare module GameBp {
-    class Credits extends Phaser.State {
-        public bg: Phaser.Sprite;
-        public preload(): void;
-        public create(): void;
-        public onBack(): void;
-        public shutdown(): void;
-    }
-}
-declare module GameBp {
-    class GameBp extends Phaser.Game {
-        constructor();
-    }
-}
-declare module GameBp {
     class GameScene extends Phaser.State {
         public background: Phaser.Sprite;
         public music: Phaser.Sound;
@@ -30,6 +10,11 @@ declare module GameBp {
         public onWin(): void;
         public onLose(): void;
         public shutdown(): void;
+    }
+}
+declare module GameBp {
+    class GameBp extends Phaser.Game {
+        constructor();
     }
 }
 declare module GameBp {
@@ -64,9 +49,24 @@ declare module GameBp {
         public startMainMenu(): void;
     }
 }
+declare module GameBp {
+    class Bootloader extends Phaser.State {
+        public preload(): void;
+        public create(): void;
+    }
+}
 declare module Utils {
     function createButton(callbackContext: any, game: Phaser.Game, textString: string, callback: Function, x: number, y: number): void;
     function getAudioFileArray(fileNameWithoutExtention: string): string[];
+}
+declare module GameBp {
+    class Credits extends Phaser.State {
+        public bg: Phaser.Sprite;
+        public preload(): void;
+        public create(): void;
+        public onBack(): void;
+        public shutdown(): void;
+    }
 }
 declare module GameBp {
     class Win extends Phaser.State {

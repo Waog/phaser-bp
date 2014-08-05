@@ -11,6 +11,8 @@ Scene.Credits.prototype = {
         this.load.image('creditsBg',
                 'assets/placeholder/img/squareGradientTopDownBlue.png');
         this.game.creditsMusic.play();
+        
+        this.game.load.bitmapFont('bmfont', 'assets/placeholder/fonts/font.png', 'assets/placeholder/fonts/font.fnt');
     },
 
     create : function() {
