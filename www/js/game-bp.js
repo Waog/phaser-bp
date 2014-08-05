@@ -1,3 +1,6 @@
+window.onload = function () {
+    var game = new GameBp.GameBp();
+};
 var __extends = this.__extends || function (d, b) {
     for (var p in b) if (b.hasOwnProperty(p)) d[p] = b[p];
     function __() { this.constructor = d; }
@@ -31,7 +34,7 @@ var GameBp;
             this.background.height = this.game.world.height;
 
             var tutorialString = "shoot the black guy,\ndon't shot the white guy.";
-            this.game.add.text(10, 10, tutorialString, undefined);
+            this.game.add.bitmapText(10, 10, 'bmFont', tutorialString, 50);
 
             var enemy = this.add.sprite(100, 100, "enemy");
             this.addPhysicsMovmentAndColision(enemy);
@@ -73,30 +76,6 @@ var GameBp;
     })(Phaser.State);
     GameBp.GameScene = GameScene;
 })(GameBp || (GameBp = {}));
-window.onload = function () {
-    var game = new GameBp.GameBp();
-};
-var GameBp;
-(function (_GameBp) {
-    var GameBp = (function (_super) {
-        __extends(GameBp, _super);
-        function GameBp() {
-            _super.call(this, 640, 480, Phaser.AUTO, 'game');
-
-            this.state.add('Bootloader', _GameBp.Bootloader);
-            this.state.add('Preloader', _GameBp.Preloader);
-            this.state.add('MainMenu', _GameBp.MainMenu);
-            this.state.add('Credits', _GameBp.Credits);
-            this.state.add('GameScene', _GameBp.GameScene);
-            this.state.add('Win', _GameBp.Win);
-            this.state.add('Lose', _GameBp.Lose);
-
-            this.state.start('Bootloader');
-        }
-        return GameBp;
-    })(Phaser.Game);
-    _GameBp.GameBp = GameBp;
-})(GameBp || (GameBp = {}));
 var GameBp;
 (function (GameBp) {
     var Lose = (function (_super) {
@@ -116,14 +95,10 @@ var GameBp;
             this.bg.inputEnabled = true;
             this.bg.events.onInputDown.add(this.onInteraction, this);
 
-            var textString = "Game\nOver!";
-            var textStyle = {
-                font: "60px Arial",
-                fill: "#ABCDEF",
-                align: "center"
-            };
-            var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, textString, textStyle);
-            text.anchor.set(0.5, 0.5);
+            var text = this.game.add.bitmapText(0, 0, 'bmFont', 'Game\nOver!', 80);
+            text.align = 'center';
+            text.x = this.game.world.centerX - text.width / 2;
+            text.y = this.game.world.centerY - text.height / 2;
         };
 
         Lose.prototype.onInteraction = function () {
@@ -158,15 +133,15 @@ var GameBp;
             this.background.height = this.game.world.height;
             this.background.alpha = 0;
 
-            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'Awesomo II', 72);
+            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'phaser-bp', 120);
             this.logo.x = this.world.centerX - this.logo.width / 2;
 
             this.add.tween(this.background).to({ alpha: 1 }, 1000, Phaser.Easing.Bounce.InOut, true);
-            this.add.tween(this.logo).to({ y: 100 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
+            this.add.tween(this.logo).to({ y: 70 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
 
-            var startBtn = new GameBp.DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5);
+            var startBtn = new GameBp.DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5, 4 * this.game.height / 5);
             this.add.existing(startBtn);
-            var creditsBtn = new GameBp.DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5);
+            var creditsBtn = new GameBp.DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5, 4 * this.game.height / 5);
             this.add.existing(creditsBtn);
         };
 
@@ -242,6 +217,99 @@ var GameBp;
         return Preloader;
     })(Phaser.State);
     GameBp.Preloader = Preloader;
+})(GameBp || (GameBp = {}));
+var GameBp;
+(function (GameBp) {
+    var Win = (function (_super) {
+        __extends(Win, _super);
+        function Win() {
+            _super.apply(this, arguments);
+        }
+        Win.prototype.preload = function () {
+            this.load.image('winBg', 'assets/placeholder/img/squareGradientTopDownGreen.png');
+            //            this.game.winSceneMusic.play();
+        };
+
+        Win.prototype.create = function () {
+            this.bg = this.add.sprite(0, 0, "winBg");
+            this.bg.width = this.game.world.width;
+            this.bg.height = this.game.world.height;
+            this.bg.inputEnabled = true;
+            this.bg.events.onInputDown.add(this.onInteraction, this);
+
+            var text = this.game.add.bitmapText(0, 0, 'bmFont', 'Win!', 80);
+            text.align = 'center';
+            text.x = this.game.world.centerX - text.width / 2;
+            text.y = this.game.world.centerY - text.height / 2;
+        };
+
+        Win.prototype.onInteraction = function () {
+            //            this.game.clickSound.play();
+            this.game.state.start('MainMenu');
+        };
+
+        Win.prototype.shutdown = function () {
+            //            this.game.winSceneMusic.stop();
+        };
+        return Win;
+    })(Phaser.State);
+    GameBp.Win = Win;
+})(GameBp || (GameBp = {}));
+var GameBp;
+(function (GameBp) {
+    var DecoratedButton = (function (_super) {
+        __extends(DecoratedButton, _super);
+        function DecoratedButton(text, game, callback, callbackContext, size, x, y) {
+            if (typeof size === "undefined") { size = 65; }
+            _super.call(this, game);
+
+            this.button = new Phaser.Button(game, 0, 0, 'button', callback, callbackContext, 2, 1, 0);
+
+            this.label = game.add.bitmapText(DecoratedButton.PADDING, DecoratedButton.PADDING, 'bmFont', text, size);
+            this.label.align = 'center';
+
+            this.button.width = this.label.width + 3 * DecoratedButton.PADDING;
+            this.button.height = this.label.height + 3 * DecoratedButton.PADDING;
+
+            this.add(this.button);
+            this.add(this.label);
+
+            if (x) {
+                this.x = x - this.button.width / 2;
+            } else {
+                this.x = game.world.centerX - this.button.width / 2;
+            }
+            if (y) {
+                this.y = y - this.button.height / 2;
+            } else {
+                this.y = game.world.centerY - this.button.height / 2;
+            }
+        }
+        DecoratedButton.PADDING = 15;
+        return DecoratedButton;
+    })(Phaser.Group);
+    GameBp.DecoratedButton = DecoratedButton;
+})(GameBp || (GameBp = {}));
+var GameBp;
+(function (_GameBp) {
+    var GameBp = (function (_super) {
+        __extends(GameBp, _super);
+        function GameBp() {
+            _super.call(this, 640, 480, Phaser.AUTO, 'game');
+
+            this.state.add('Bootloader', _GameBp.Bootloader);
+            this.state.add('Preloader', _GameBp.Preloader);
+            this.state.add('MainMenu', _GameBp.MainMenu);
+            this.state.add('Credits', _GameBp.Credits);
+            this.state.add('GameScene', _GameBp.GameScene);
+            this.state.add('Win', _GameBp.Win);
+            this.state.add('Lose', _GameBp.Lose);
+
+            this.state.start('Bootloader');
+        }
+        return GameBp;
+    })(Phaser.Game);
+    _GameBp.GameBp = GameBp;
 })(GameBp || (GameBp = {}));
 var GameBp;
 (function (GameBp) {
@@ -324,16 +392,14 @@ var GameBp;
             this.bg.width = this.game.world.width;
             this.bg.height = this.game.world.height;
 
-            var PADDING = 20;
             var text = this.game.add.bitmapText(0, 0, 'bmFont', creditsString);
             text.align = 'center';
             text.x = (this.game.world.width - text.width) / 2;
-            text.y = PADDING;
+            text.y = 20;
 
-            //            text.wordWrap = true;
-            //            text.wordWrapWidth = this.game.world.width - 2 * PADDING;
-            //            text.anchor.set(0.5, 0);
-            Utils.createButton(this, this.game, "Back", this.onBack, this.game.world.centerX, 300);
+            var backBtn = new GameBp.DecoratedButton("Back", this.game, this.onBack, this);
+            backBtn.y = this.world.height - backBtn.height - 20;
+            this.add.existing(backBtn);
         };
 
         Credits.prototype.onBack = function () {
@@ -348,80 +414,5 @@ var GameBp;
     })(Phaser.State);
     GameBp.Credits = Credits;
     ;
-})(GameBp || (GameBp = {}));
-var GameBp;
-(function (GameBp) {
-    var Win = (function (_super) {
-        __extends(Win, _super);
-        function Win() {
-            _super.apply(this, arguments);
-        }
-        Win.prototype.preload = function () {
-            this.load.image('winBg', 'assets/placeholder/img/squareGradientTopDownGreen.png');
-            //            this.game.winSceneMusic.play();
-        };
-
-        Win.prototype.create = function () {
-            this.bg = this.add.sprite(0, 0, "winBg");
-            this.bg.width = this.game.world.width;
-            this.bg.height = this.game.world.height;
-            this.bg.inputEnabled = true;
-            this.bg.events.onInputDown.add(this.onInteraction, this);
-
-            var textString = "WIN!";
-            var textStyle = {
-                font: "60px Arial",
-                fill: "#ABCDEF",
-                align: "center"
-            };
-            var text = this.game.add.text(this.game.world.centerX, this.game.world.centerY, textString, textStyle);
-            text.anchor.set(0.5, 0.5);
-        };
-
-        Win.prototype.onInteraction = function () {
-            //            this.game.clickSound.play();
-            this.game.state.start('MainMenu');
-        };
-
-        Win.prototype.shutdown = function () {
-            //            this.game.winSceneMusic.stop();
-        };
-        return Win;
-    })(Phaser.State);
-    GameBp.Win = Win;
-})(GameBp || (GameBp = {}));
-var GameBp;
-(function (GameBp) {
-    var DecoratedButton = (function (_super) {
-        __extends(DecoratedButton, _super);
-        function DecoratedButton(text, game, callback, callbackContext, size, x, y) {
-            if (typeof size === "undefined") { size = 65; }
-            _super.call(this, game);
-
-            this.button = new Phaser.Button(game, 0, 0, 'button', callback, callbackContext, 2, 1, 0);
-
-            this.label = game.add.bitmapText(DecoratedButton.PADDING, DecoratedButton.PADDING, 'bmFont', text, size);
-
-            this.button.width = this.label.width + 3 * DecoratedButton.PADDING;
-            this.button.height = this.label.height + 3 * DecoratedButton.PADDING;
-
-            this.add(this.button);
-            this.add(this.label);
-
-            if (x) {
-                this.x = x - this.button.width / 2;
-            } else {
-                this.x = game.world.centerX - this.button.width / 2;
-            }
-            if (y) {
-                this.y = y - this.button.height / 2;
-            } else {
-                this.y = game.world.centerY - this.button.height / 2;
-            }
-        }
-        DecoratedButton.PADDING = 15;
-        return DecoratedButton;
-    })(Phaser.Group);
-    GameBp.DecoratedButton = DecoratedButton;
 })(GameBp || (GameBp = {}));
 //# sourceMappingURL=game-bp.js.map

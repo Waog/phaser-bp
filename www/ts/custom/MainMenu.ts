@@ -23,15 +23,15 @@ module GameBp {
             this.background.height = this.game.world.height;
             this.background.alpha = 0;
 
-            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'Awesomo II', 72);
+            this.logo = this.add.bitmapText(this.world.centerX, -200, 'bmFont', 'phaser-bp', 120);
             this.logo.x = this.world.centerX - this.logo.width / 2;
 
             this.add.tween(this.background).to({ alpha: 1 }, 1000, Phaser.Easing.Bounce.InOut, true);
-            this.add.tween(this.logo).to({ y: 100 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
+            this.add.tween(this.logo).to({ y: 70 }, 1000, Phaser.Easing.Elastic.Out, true, 2000);
 
-            var startBtn: DecoratedButton = new DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5);
+            var startBtn: DecoratedButton = new DecoratedButton("Start", this.game, this.onStart, this, 65, this.game.width / 5, 4 * this.game.height / 5);
             this.add.existing(startBtn);
-            var creditsBtn: DecoratedButton = new DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5);
+            var creditsBtn: DecoratedButton = new DecoratedButton("Credtis", this.game, this.onCredits, this, 40, 4 * this.game.width / 5, 4 * this.game.height / 5);
             this.add.existing(creditsBtn);
         }
 

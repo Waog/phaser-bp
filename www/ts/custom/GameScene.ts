@@ -32,7 +32,7 @@ module GameBp {
             this.background.height = this.game.world.height;
 
             var tutorialString = "shoot the black guy,\ndon't shot the white guy.";
-            this.game.add.text(10, 10, tutorialString, undefined);
+            this.game.add.bitmapText(10, 10, 'bmFont', tutorialString, 50);
 
             var enemy = this.add.sprite(100, 100, "enemy");
             this.addPhysicsMovmentAndColision(enemy);

@@ -19,15 +19,10 @@ module GameBp {
             this.bg.inputEnabled = true;
             this.bg.events.onInputDown.add(this.onInteraction, this);
 
-            var textString = "Game\nOver!";
-            var textStyle = {
-                font: "60px Arial",
-                fill: "#ABCDEF",
-                align: "center"
-            };
-            var text = this.game.add.text(this.game.world.centerX,
-                this.game.world.centerY, textString, textStyle);
-            text.anchor.set(0.5, 0.5);
+            var text:Phaser.BitmapText = this.game.add.bitmapText(0, 0, 'bmFont', 'Game\nOver!', 80);
+            text.align = 'center';
+            text.x = this.game.world.centerX - text.width / 2;
+            text.y = this.game.world.centerY - text.height / 2;
         }
 
         onInteraction() {

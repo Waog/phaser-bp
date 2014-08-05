@@ -1,13 +1,13 @@
 module GameBp {
 
     export class Win extends Phaser.State {
-    
-        bg:Phaser.Sprite;
-        
+
+        bg: Phaser.Sprite;
+
         preload() {
             this.load.image('winBg',
                 'assets/placeholder/img/squareGradientTopDownGreen.png');
-//            this.game.winSceneMusic.play();
+            //            this.game.winSceneMusic.play();
         }
 
         create() {
@@ -17,24 +17,19 @@ module GameBp {
             this.bg.inputEnabled = true;
             this.bg.events.onInputDown.add(this.onInteraction, this);
 
-            var textString = "WIN!";
-            var textStyle = {
-                font: "60px Arial",
-                fill: "#ABCDEF",
-                align: "center"
-            };
-            var text = this.game.add.text(this.game.world.centerX,
-                this.game.world.centerY, textString, textStyle);
-            text.anchor.set(0.5, 0.5);
+            var text: Phaser.BitmapText = this.game.add.bitmapText(0, 0, 'bmFont', 'Win!', 80);
+            text.align = 'center';
+            text.x = this.game.world.centerX - text.width / 2;
+            text.y = this.game.world.centerY - text.height / 2;
         }
 
         onInteraction() {
-//            this.game.clickSound.play();
+            //            this.game.clickSound.play();
             this.game.state.start('MainMenu');
         }
 
         shutdown() {
-//            this.game.winSceneMusic.stop();
+            //            this.game.winSceneMusic.stop();
         }
     }
 }

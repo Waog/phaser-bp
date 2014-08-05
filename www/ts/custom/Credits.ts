@@ -21,19 +21,15 @@ module GameBp {
             this.bg.width = this.game.world.width;
             this.bg.height = this.game.world.height;
 
-            var PADDING = 20;
             var text: Phaser.BitmapText = this.game.add.bitmapText(0, 0,
                 'bmFont', creditsString);
             text.align = 'center';
             text.x = (this.game.world.width - text.width) / 2;
-            text.y = PADDING;
+            text.y = 20;
 
-            //            text.wordWrap = true;
-            //            text.wordWrapWidth = this.game.world.width - 2 * PADDING;
-            //            text.anchor.set(0.5, 0);
-
-            Utils.createButton(this, this.game, "Back", this.onBack,
-                this.game.world.centerX, 300);
+            var backBtn: DecoratedButton = new DecoratedButton("Back", this.game, this.onBack, this);
+            backBtn.y = this.world.height - backBtn.height - 20; 
+            this.add.existing(backBtn);
         }
 
         onBack() {
